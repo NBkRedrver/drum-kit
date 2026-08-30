@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>PRO ONE-TOM DRUM KIT - Mobile Landscape Edition</title>
+  <!-- iOS Safari & Android Fullscreen PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DrumKit">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0b0d14">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1952,6 +1958,14 @@ html, body {
           <input type="number" id="metro-bpm" min="30" max="300" value="120" class="input-number" title="BPM">
         </div>
 
+        <!-- Fullscreen Button -->
+        <div class="control-group">
+          <button id="btn-toggle-fullscreen" class="btn-icon" title="全画面表示切替">
+            <span class="icon">⛶</span>
+            <span class="btn-text">全画面</span>
+          </button>
+        </div>
+
         <!-- Key Labels Toggle -->
         <div class="control-group">
           <button id="btn-toggle-keylabels" class="btn-icon active" title="キーバッジ表示切替">
@@ -2922,7 +2936,12 @@ html, body {
           this.lastTouchTimestamp = Date.now();
           window.audioEngine.init();
 
-          // Prevent emulated mouse events and gestures
+          // Do NOT preventDefault if touching start overlay, modals, or header buttons
+          if (e.target.closest('#audio-start-overlay, #settings-modal, #key-capture-modal, .app-header, button')) {
+            return;
+          }
+
+          // Prevent emulated mouse events and gestures only on drum play area
           if (e.target.closest('.drum-stage-wrapper, .mobile-pedal-btn, .mobile-kick-btn, .drum-piece')) {
             e.preventDefault();
           }
@@ -2952,6 +2971,9 @@ html, body {
 
         const handleTouchEnd = (e) => {
           this.lastTouchTimestamp = Date.now();
+          if (e.target.closest('#audio-start-overlay, #settings-modal, #key-capture-modal, .app-header, button')) {
+            return;
+          }
           if (e.target.closest('.drum-stage-wrapper, .mobile-pedal-btn, .mobile-kick-btn, .drum-piece')) {
             e.preventDefault();
           }
@@ -3064,17 +3086,39 @@ html, body {
       }
 
       initEventListeners() {
-        this.btnStartAudio.addEventListener('click', () => {
+        const closeStartOverlay = (e) => {
+          if (e) {
+            e.stopPropagation();
+          }
           window.audioEngine.init();
           this.audioOverlay.classList.add('hidden');
+          try { window.scrollTo(0, 1); } catch (err) {}
+        };
+
+        this.btnStartAudio.addEventListener('click', closeStartOverlay);
+        this.btnStartAudio.addEventListener('touchend', closeStartOverlay);
+        this.audioOverlay.addEventListener('click', (e) => {
+          if (e.target === this.audioOverlay || e.target.closest('.start-card')) {
+            closeStartOverlay(e);
+          }
+        });
+        this.audioOverlay.addEventListener('touchend', (e) => {
+          if (e.target === this.audioOverlay || e.target.closest('.start-card')) {
+            closeStartOverlay(e);
+          }
         });
 
         window.addEventListener('keydown', () => {
           if (!this.audioOverlay.classList.contains('hidden')) {
-            window.audioEngine.init();
-            this.audioOverlay.classList.add('hidden');
+            closeStartOverlay();
           }
         }, { once: true });
+
+        // Fullscreen Toggle button
+        const btnFullscreen = document.getElementById('btn-toggle-fullscreen');
+        if (btnFullscreen) {
+          btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
+        }
 
         this.btnOpenSettings.addEventListener('click', () => this.openSettings());
         this.btnCloseSettings.addEventListener('click', () => this.closeSettings());
@@ -3494,6 +3538,26 @@ html, body {
           setTimeout(() => {
             statusMsg.textContent = '設定は自動保存されています';
           }, 3000);
+        }
+      }
+
+      toggleFullscreen() {
+        const doc = document.documentElement;
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          if (doc.requestFullscreen) {
+            doc.requestFullscreen().catch(() => {});
+          } else if (doc.webkitRequestFullscreen) {
+            doc.webkitRequestFullscreen();
+          } else {
+            // iOS Safari explanation
+            alert('💡 iPhone Safariで完全全画面にする方法:\n\nSafariの共有ボタン(四角から上矢印 ⎋) をタップして「ホーム画面に追加 ＋」を選択すると、アドレスバーが消えて完全な全画面アプリとして起動します！');
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
         }
       }
     }
