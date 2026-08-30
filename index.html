@@ -2621,7 +2621,7 @@ html, body {
     // --- 2. ConfigManager ---
     class ConfigManager {
       constructor() {
-        this.STORAGE_KEY = 'PRO_DRUMKIT_CONFIG_SMART_V3';
+        this.STORAGE_KEY = 'PRO_DRUMKIT_CONFIG_SMART_V4';
         this.defaultConfig = {
           masterVolume: 1.0,
           chokeHoldTimeMs: 200,
@@ -2637,9 +2637,9 @@ html, body {
             pedalChick: 1.0,
             crashLeft: 0.95,
             crashRight: 0.95,
-            ride: 1.0,
+            ride: 2.0,      // 2x volume boost
             china: 0.95,
-            splash: 0.90
+            splash: 1.35    // 1.5x volume boost
           },
           keybindings: {
             kick: ['KeyB', 'KeyV', 'KeyN', 'Gamepad:Button0', 'Gamepad:Button12'],
@@ -3519,7 +3519,7 @@ html, body {
               <span class="value-display" id="vol-display-${soundId}">${percent}%</span>
             </div>
             <div class="vol-card-controls">
-              <input type="range" min="0" max="150" value="${percent}" class="slider-styled" id="vol-slider-${soundId}">
+              <input type="range" min="0" max="250" value="${percent}" class="slider-styled" id="vol-slider-${soundId}">
               <button class="btn-icon btn-test-vol" data-sound="${soundId}">🔊</button>
             </div>
           `;
