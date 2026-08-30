@@ -1653,27 +1653,48 @@ html, body {
   height: 100vh;
   height: 100dvh;
   padding: 0 var(--safe-right) var(--safe-bottom) var(--safe-left);
+  display: flex;
+  flex-direction: column;
+}
+
+/* In-App Browser Warning Banner */
+.inapp-banner {
+  display: none;
+  background: linear-gradient(90deg, #b45309 0%, #d97706 100%);
+  color: #ffffff;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.inapp-banner a {
+  color: #fff;
+  text-decoration: underline;
+  margin-left: 6px;
 }
 
 /* Compact Mobile Header */
 .app-header {
-  height: 42px;
-  min-height: 42px;
-  padding: 0 16px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0 12px;
   padding-top: var(--safe-top);
   background: linear-gradient(180deg, #161922 0%, #0d0f17 100%);
 }
 
 .logo-area {
-  gap: 8px;
+  gap: 6px;
 }
 
 .logo-icon {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .logo-text h1 {
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 1px;
 }
 
@@ -1682,45 +1703,45 @@ html, body {
 }
 
 .header-controls {
-  gap: 10px;
+  gap: 8px;
 }
 
 .control-group {
-  padding: 3px 8px;
-  gap: 6px;
+  padding: 2px 6px;
+  gap: 4px;
 }
 
 .control-group label {
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .slider-styled {
-  width: 65px;
-  height: 5px;
+  width: 55px;
+  height: 4px;
 }
 
 .slider-styled::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 .btn-icon, .btn-primary, .btn-secondary {
-  padding: 4px 8px;
-  font-size: 11px;
+  padding: 3px 6px;
+  font-size: 10px;
 }
 
 .input-number {
-  width: 42px;
-  font-size: 11px;
-  padding: 2px 0;
+  width: 36px;
+  font-size: 10px;
+  padding: 1px 0;
 }
 
-/* Drum Stage Fit for iPhone Landscape */
+/* Drum Stage Fit for iPhone Landscape (Max Height ~300-340px) */
 .drum-stage-wrapper {
   flex: 1;
   width: 100%;
-  height: calc(100vh - 42px);
-  height: calc(100dvh - 42px);
+  height: calc(100vh - 38px);
+  height: calc(100dvh - 38px);
   position: relative;
   overflow: hidden;
 }
@@ -1728,148 +1749,177 @@ html, body {
 .drum-kit-scene {
   width: 100%;
   height: 100%;
-  perspective: 1000px;
+  perspective: 900px;
 }
 
 .stage-perspective {
   width: 100%;
-  max-width: 920px;
+  max-width: 860px;
   height: 100%;
-  max-height: 380px;
-  transform: rotateX(8deg) translateY(-2%);
+  max-height: 320px;
+  transform: rotateX(6deg) translateY(-2%);
   margin: 0 auto;
 }
 
 .drum-rug {
-  top: 10%;
-  left: 2%;
-  width: 96%;
-  height: 85%;
-  border-radius: 30px;
+  top: 8%;
+  left: 3%;
+  width: 94%;
+  height: 84%;
+  border-radius: 24px;
 }
 
-/* Responsive Drum Piece Sizing for Smartphone Screen */
+/* Drum Piece Compact Sizes */
 .drum-piece {
-  /* Sizes scaled down cleanly for iPhone 350px-400px height */
   width: var(--size);
   height: var(--size);
   transition: transform 0.08s ease, filter 0.08s ease;
 }
 
-/* Touch active piece visual highlight */
 .drum-piece:active {
-  filter: brightness(1.25) drop-shadow(0 0 12px rgba(245, 158, 11, 0.6));
+  filter: brightness(1.3) drop-shadow(0 0 10px rgba(245, 158, 11, 0.7));
 }
 
 .part-label {
-  font-size: 9px;
-  bottom: -14px;
+  font-size: 8px;
+  bottom: -12px;
 }
 
 .key-badge {
-  font-size: 9px;
-  padding: 1px 5px;
-  top: -6px;
-  right: -6px;
+  font-size: 8px;
+  padding: 1px 4px;
+  top: -4px;
+  right: -4px;
 }
 
 .key-badge.hihat-key {
-  top: 4px;
-  right: -8px;
+  top: 2px;
+  right: -6px;
 }
 
 .key-badge.pedal-key {
-  bottom: -16px;
-  font-size: 9px;
+  bottom: -14px;
+  font-size: 8px;
 }
 
-/* On-screen Mobile Pedal Button */
+/* On-screen Mobile Pedal Button (Left Thumb) */
 .mobile-pedal-btn {
   position: absolute;
-  bottom: 12px;
-  left: calc(14px + var(--safe-left));
-  width: 82px;
-  height: 48px;
+  bottom: calc(4px + var(--safe-bottom));
+  left: calc(8px + var(--safe-left));
+  width: 76px;
+  height: 42px;
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   border: 2px solid #3b82f6;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #93c5fd;
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 120;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7), 0 0 10px rgba(59, 130, 246, 0.4);
+  z-index: 150;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 8px rgba(59, 130, 246, 0.4);
   touch-action: none;
   cursor: pointer;
-  transition: all 0.08s ease;
 }
 
 .mobile-pedal-btn.active {
   background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
   color: #ffffff;
   border-color: #93c5fd;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.9);
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.9);
   transform: scale(0.95);
 }
 
 .mobile-pedal-btn .pedal-icon {
-  font-size: 14px;
+  font-size: 12px;
 }
 
-/* Mobile Quick Kick Button (Right side thumb helper) */
+/* Mobile Quick Kick Button (Right Thumb) */
 .mobile-kick-btn {
   position: absolute;
-  bottom: 12px;
-  right: calc(14px + var(--safe-right));
-  width: 82px;
-  height: 48px;
+  bottom: calc(4px + var(--safe-bottom));
+  right: calc(8px + var(--safe-right));
+  width: 76px;
+  height: 42px;
   background: linear-gradient(180deg, #2d2319 0%, #140d07 100%);
   border: 2px solid #f59e0b;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #fde68a;
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 120;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7), 0 0 10px rgba(245, 158, 11, 0.4);
+  z-index: 150;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7), 0 0 8px rgba(245, 158, 11, 0.4);
   touch-action: none;
   cursor: pointer;
-  transition: all 0.08s ease;
 }
 
-.mobile-kick-btn:active {
+.mobile-kick-btn.active {
   background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
   color: #000000;
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.9);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.9);
   transform: scale(0.95);
 }
 
 .mobile-kick-btn .kick-icon {
-  font-size: 14px;
+  font-size: 12px;
+}
+
+/* Ultra Slim Audio Start Overlay */
+.audio-start-overlay {
+  z-index: 300;
+  padding: 10px;
+}
+
+.start-card-slim {
+  background: linear-gradient(145deg, #1b2030 0%, #121522 100%);
+  border: 1px solid var(--border-bright);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-align: center;
+  max-width: 380px;
+  width: 92%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.btn-launch-mobile {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #000;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.4);
+  width: 100%;
+  max-width: 240px;
 }
 
 /* Activity bar */
 .activity-bar {
-  height: 28px;
-  padding: 0 12px;
-  gap: 8px;
+  height: 24px;
+  padding: 0 10px;
+  gap: 6px;
 }
 
 .activity-title {
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .act-item {
-  font-size: 9px;
-  padding: 1px 6px;
+  font-size: 8px;
+  padding: 1px 4px;
 }
 
 /* Portrait Warning Overlay */
@@ -1883,13 +1933,13 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
+  padding: 20px;
 }
 
 .portrait-icon {
-  font-size: 56px;
+  font-size: 48px;
   animation: rotatePhone 2s infinite ease-in-out;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 @keyframes rotatePhone {
@@ -1901,13 +1951,13 @@ html, body {
 
 .portrait-warning-overlay h3 {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--accent-gold);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .portrait-warning-overlay p {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -1921,6 +1971,12 @@ html, body {
 </head>
 <body>
   <div id="app">
+
+    <!-- In-App Browser Warning Banner (LINE / Discord) -->
+    <div id="inapp-warning-banner" class="inapp-banner">
+      <span>⚠️ アプリ内ブラウザで開かれています。</span>
+      <a href="javascript:void(0)" id="btn-inapp-safari-help">Safariで開く方法 ↗</a>
+    </div>
 
     <!-- Portrait Orientation Helper Overlay -->
     <div class="portrait-warning-overlay">
@@ -1958,9 +2014,9 @@ html, body {
           <input type="number" id="metro-bpm" min="30" max="300" value="120" class="input-number" title="BPM">
         </div>
 
-        <!-- Fullscreen Button -->
+        <!-- Fullscreen Guide Button -->
         <div class="control-group">
-          <button id="btn-toggle-fullscreen" class="btn-icon" title="全画面表示切替">
+          <button id="btn-toggle-fullscreen" class="btn-icon" title="全画面表示">
             <span class="icon">⛶</span>
             <span class="btn-text">全画面</span>
           </button>
@@ -1976,7 +2032,7 @@ html, body {
 
         <!-- Settings Button -->
         <div class="control-group">
-          <button id="btn-open-settings" class="btn-primary" title="キー設定 & 音量設定を開く">
+          <button id="btn-open-settings" class="btn-primary" title="設定を開く">
             <span class="icon">⚙️</span>
             <span class="btn-text">CONFIG</span>
           </button>
@@ -1986,19 +2042,15 @@ html, body {
 
     <!-- Main Drum Stage (Optimized for iPhone Landscape) -->
     <main class="drum-stage-wrapper">
-      <!-- Audio Start Overlay -->
+      <!-- Slim Audio Start Overlay (Guaranteed to be 100% visible on small mobile screens) -->
       <div id="audio-start-overlay" class="audio-start-overlay">
-        <div class="start-card" style="padding: 20px 24px; max-width: 440px;">
-          <div class="start-icon" style="font-size: 32px; margin-bottom: 6px;">🥁</div>
-          <h2 style="font-size: 18px;">ONE-TOM DRUM KIT</h2>
-          <p style="font-size: 12px; margin-bottom: 14px;">画面をタップして演奏を開始します<br><small style="color:#f59e0b;">(スマホ横画面最適化・全音源内蔵)</small></p>
-          <div class="quick-tips" style="padding: 8px 12px; gap: 4px; margin-bottom: 16px; font-size: 11px;">
-            <div class="tip-item">左下: <strong>HH PEDAL</strong> (押下中クローズ)</div>
-            <div class="tip-item">右下: <strong>KICK</strong> (バスドラム)</div>
-            <div class="tip-item">画面の太鼓・シンバルを直接タッチ</div>
-            <div class="tip-item">シンバル長押しで<strong>チョーク消音</strong></div>
+        <div class="start-card-slim">
+          <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:2px;">
+            <span style="font-size:20px;">🥁</span>
+            <h2 style="font-size:15px; color:#fff; font-family:var(--font-display); margin:0;">ONE-TOM DRUM KIT</h2>
           </div>
-          <button id="btn-start-audio" class="btn-launch" style="padding: 8px 24px; font-size: 14px;">演奏を開始する</button>
+          <p style="font-size:11px; margin-bottom:10px; color:#cbd5e1;">画面をタップしてオーディオを開始</p>
+          <button id="btn-start-audio" class="btn-launch-mobile">演奏を開始する ❯</button>
         </div>
       </div>
 
@@ -2009,10 +2061,10 @@ html, body {
           <!-- Background Drum Rug -->
           <div class="drum-rug"></div>
 
-          <!-- ================= PIECES POSITIONED FOR IPHONE LANDSCAPE ================= -->
+          <!-- ================= COMPACT PIECES FOR IPHONE LANDSCAPE ================= -->
 
           <!-- 1. LEFT CRASH CYMBAL (Top-Left) -->
-          <div class="drum-piece cymbal-piece" id="piece-crash-left" data-part="crashLeft" style="--x: 12%; --y: 24%; --size: 110px; --z: 10;">
+          <div class="drum-piece cymbal-piece" id="piece-crash-left" data-part="crashLeft" style="--x: 12%; --y: 22%; --size: 92px; --z: 10;">
             <div class="cymbal-stand"></div>
             <div class="cymbal-disc crash-disc">
               <div class="cymbal-grooves"></div>
@@ -2026,7 +2078,7 @@ html, body {
           </div>
 
           <!-- 2. SPLASH CYMBAL (Between Hi-Hat and Left Crash) -->
-          <div class="drum-piece cymbal-piece" id="piece-splash" data-part="splash" style="--x: 25%; --y: 23%; --size: 72px; --z: 15;">
+          <div class="drum-piece cymbal-piece" id="piece-splash" data-part="splash" style="--x: 24%; --y: 20%; --size: 58px; --z: 15;">
             <div class="cymbal-stand"></div>
             <div class="cymbal-disc splash-disc">
               <div class="cymbal-grooves"></div>
@@ -2040,7 +2092,7 @@ html, body {
           </div>
 
           <!-- 3. HI-HAT (Left-Front) -->
-          <div class="drum-piece hihat-piece" id="piece-hihat" data-part="hihat" style="--x: 17%; --y: 60%; --size: 105px; --z: 25;">
+          <div class="drum-piece hihat-piece" id="piece-hihat" data-part="hihat" style="--x: 17%; --y: 56%; --size: 88px; --z: 25;">
             <div class="hihat-stand"></div>
             <div class="hihat-bottom-disc"></div>
             <div class="cymbal-disc hihat-top-disc open" id="hihat-top-cymbal">
@@ -2049,9 +2101,9 @@ html, body {
               <div class="cymbal-reflection"></div>
               <div class="hihat-state-badge" id="hihat-state-text">OPEN</div>
             </div>
-            <div class="hihat-pedal-graphic" id="hihat-pedal-graphic" data-part="hihatPedal" style="bottom: -28px; width: 36px; height: 26px;">
+            <div class="hihat-pedal-graphic" id="hihat-pedal-graphic" data-part="hihatPedal" style="bottom: -22px; width: 30px; height: 20px;">
               <div class="pedal-footplate">
-                <span class="pedal-text" style="font-size: 7px;">PEDAL</span>
+                <span class="pedal-text" style="font-size: 6px;">PEDAL</span>
               </div>
             </div>
             <div class="key-badge hihat-key" data-bind-part="hihat">J</div>
@@ -2060,9 +2112,9 @@ html, body {
           </div>
 
           <!-- 4. 1-TOM / RACK TOM (Center-Top) -->
-          <div class="drum-piece tom-piece" id="piece-rack-tom" data-part="rackTom" style="--x: 45%; --y: 28%; --size: 96px; --z: 20;">
+          <div class="drum-piece tom-piece" id="piece-rack-tom" data-part="rackTom" style="--x: 45%; --y: 24%; --size: 76px; --z: 20;">
             <div class="drum-shell-outer">
-              <div class="drum-rim" style="border-width: 5px;"></div>
+              <div class="drum-rim" style="border-width: 4px;"></div>
               <div class="drum-head-mesh">
                 <div class="drum-head-glow"></div>
                 <div class="drum-badge-brand">12" TOM</div>
@@ -2074,29 +2126,29 @@ html, body {
           </div>
 
           <!-- 5. KICK / BASS DRUM (Center-Bottom) -->
-          <div class="drum-piece kick-piece" id="piece-kick" data-part="kick" style="--x: 50%; --y: 60%; --size: 130px; --z: 12;">
+          <div class="drum-piece kick-piece" id="piece-kick" data-part="kick" style="--x: 49%; --y: 56%; --size: 105px; --z: 12;">
             <div class="kick-drum-shell">
-              <div class="kick-wood-hoop" style="border-width: 8px;"></div>
+              <div class="kick-wood-hoop" style="border-width: 6px;"></div>
               <div class="kick-front-head">
-                <div class="kick-logo-text" style="font-size: 9px; letter-spacing: 1px;">SLINGERLAND</div>
-                <div class="kick-sub-hole" style="width: 24px; height: 24px;"></div>
+                <div class="kick-logo-text" style="font-size: 8px; letter-spacing: 1px;">SLINGERLAND</div>
+                <div class="kick-sub-hole" style="width: 20px; height: 20px;"></div>
                 <div class="kick-hit-ring"></div>
               </div>
             </div>
-            <div class="kick-pedal-mechanism" id="kick-pedal-anim" style="bottom: -28px; width: 40px; height: 40px;">
-              <div class="beater-rod" style="height: 18px;"></div>
-              <div class="beater-head" style="width: 10px; height: 10px;"></div>
-              <div class="kick-pedal-board" style="font-size: 7px; padding: 1px 4px;">KICK</div>
+            <div class="kick-pedal-mechanism" id="kick-pedal-anim" style="bottom: -22px; width: 32px; height: 32px;">
+              <div class="beater-rod" style="height: 14px;"></div>
+              <div class="beater-head" style="width: 8px; height: 8px;"></div>
+              <div class="kick-pedal-board" style="font-size: 6px; padding: 1px 3px;">KICK</div>
             </div>
             <div class="key-badge" data-bind-part="kick">B / V</div>
             <span class="part-label">Kick</span>
           </div>
 
           <!-- 6. SNARE DRUM (Center-Left Foreground) -->
-          <div class="drum-piece snare-piece" id="piece-snare" data-part="snare" style="--x: 33%; --y: 64%; --size: 110px; --z: 35;">
+          <div class="drum-piece snare-piece" id="piece-snare" data-part="snare" style="--x: 33%; --y: 58%; --size: 92px; --z: 35;">
             <div class="snare-stand-hardware"></div>
             <div class="drum-shell-outer snare-shell">
-              <div class="drum-rim chrome-rim" style="border-width: 6px;"></div>
+              <div class="drum-rim chrome-rim" style="border-width: 5px;"></div>
               <div class="drum-head-mesh coated-white-head">
                 <div class="drum-head-glow"></div>
                 <div class="drum-badge-brand">14" SNARE</div>
@@ -2108,23 +2160,23 @@ html, body {
           </div>
 
           <!-- 7. FLOOR TOM (Between Snare and China Cymbal, Foreground Right) -->
-          <div class="drum-piece tom-piece floor-tom-piece" id="piece-floor-tom" data-part="floorTom" style="--x: 67%; --y: 64%; --size: 118px; --z: 34;">
+          <div class="drum-piece tom-piece floor-tom-piece" id="piece-floor-tom" data-part="floorTom" style="--x: 67%; --y: 58%; --size: 96px; --z: 34;">
             <div class="drum-shell-outer floortom-shell">
-              <div class="drum-rim floortom-rim" style="border-width: 6px;"></div>
+              <div class="drum-rim floortom-rim" style="border-width: 5px;"></div>
               <div class="drum-head-mesh coated-floortom-head">
                 <div class="drum-head-glow"></div>
                 <div class="drum-badge-brand">16" FLOOR</div>
               </div>
               <div class="drum-lugs"></div>
-              <div class="floortom-leg leg-left" style="height: 16px; width: 4px;"></div>
-              <div class="floortom-leg leg-right" style="height: 16px; width: 4px;"></div>
+              <div class="floortom-leg leg-left" style="height: 12px; width: 3px;"></div>
+              <div class="floortom-leg leg-right" style="height: 12px; width: 3px;"></div>
             </div>
             <div class="key-badge" data-bind-part="floorTom">L / K</div>
             <span class="part-label">Floor Tom</span>
           </div>
 
           <!-- 8. RIDE CYMBAL (Between 1-Tom and Right Crash) -->
-          <div class="drum-piece cymbal-piece" id="piece-ride" data-part="ride" style="--x: 63%; --y: 28%; --size: 120px; --z: 18;">
+          <div class="drum-piece cymbal-piece" id="piece-ride" data-part="ride" style="--x: 63%; --y: 24%; --size: 96px; --z: 18;">
             <div class="cymbal-stand"></div>
             <div class="cymbal-disc ride-disc">
               <div class="cymbal-grooves"></div>
@@ -2138,7 +2190,7 @@ html, body {
           </div>
 
           <!-- 9. RIGHT CRASH CYMBAL (Right Top/Back) -->
-          <div class="drum-piece cymbal-piece" id="piece-crash-right" data-part="crashRight" style="--x: 80%; --y: 24%; --size: 112px; --z: 16;">
+          <div class="drum-piece cymbal-piece" id="piece-crash-right" data-part="crashRight" style="--x: 80%; --y: 22%; --size: 92px; --z: 16;">
             <div class="cymbal-stand"></div>
             <div class="cymbal-disc crash-disc right-crash-color">
               <div class="cymbal-grooves"></div>
@@ -2152,7 +2204,7 @@ html, body {
           </div>
 
           <!-- 10. CHINA CYMBAL (Bottom-Right of Right Crash) -->
-          <div class="drum-piece cymbal-piece china-piece" id="piece-china" data-part="china" style="--x: 86%; --y: 58%; --size: 110px; --z: 22;">
+          <div class="drum-piece cymbal-piece china-piece" id="piece-china" data-part="china" style="--x: 86%; --y: 54%; --size: 90px; --z: 22;">
             <div class="cymbal-stand"></div>
             <div class="cymbal-disc china-disc">
               <div class="china-inverted-lip"></div>
@@ -2170,7 +2222,7 @@ html, body {
       </div> <!-- /.drum-kit-scene -->
 
       <!-- Mobile Quick Pedal Button (Left Thumb) -->
-      <button class="mobile-pedal-btn" id="mobile-pedal-btn">
+      <button class="mobile-pedal-btn" id="mobile-pedal-btn" data-part="hihatPedal">
         <span class="pedal-icon">🦶</span>
         <span>HH PEDAL</span>
       </button>
@@ -2189,6 +2241,25 @@ html, body {
         </div>
       </div>
     </main>
+
+    <!-- Fullscreen & Safari In-App Guide Modal -->
+    <div id="fullscreen-guide-modal" class="modal-overlay hidden">
+      <div class="start-card-slim" style="max-width: 440px; text-align: left; padding: 18px 20px;">
+        <h3 style="color:#f59e0b; font-size:15px; margin-bottom:10px; font-family:var(--font-display);">📱 iPhoneで全画面表示にする方法</h3>
+        
+        <div style="background:#0f121d; padding:8px 12px; border-radius:6px; margin-bottom:8px; font-size:11px; line-height:1.5;">
+          <strong style="color:#93c5fd; display:block; margin-bottom:2px;">① Safari内でバーを最小化（約95%全画面）</strong>
+          URL入力欄の左端にある <strong>「ぁあ」</strong>（または <strong>「AA」</strong>）をタップし、<strong>「ツールバーを非表示」</strong> を選択します。
+        </div>
+
+        <div style="background:#0f121d; padding:8px 12px; border-radius:6px; margin-bottom:12px; font-size:11px; line-height:1.5;">
+          <strong style="color:#10b981; display:block; margin-bottom:2px;">② ホーム画面に追加（100% 完全全画面アプリ化）</strong>
+          Safariの <strong>共有ボタン ⎋</strong> → <strong>「ホーム画面に追加 ＋」</strong> でアイコンを作成すると、URLバーが完全に消えて本物のアプリになります！
+        </div>
+
+        <button id="btn-close-fs-guide" class="btn-launch-mobile" style="width:100%;">閉じる</button>
+      </div>
+    </div>
 
     <!-- PPSSPP-Style Config Modal -->
     <div id="settings-modal" class="modal-overlay hidden">
@@ -2217,7 +2288,7 @@ html, body {
             </button>
             <button class="nav-tab" data-tab="tab-presets">
               <span class="tab-icon">💾</span>
-              <span>プリセット</span>
+              <span>共有 & 保存</span>
             </button>
           </nav>
 
@@ -2282,8 +2353,16 @@ html, body {
 
             <div class="tab-pane" id="tab-presets">
               <div class="pane-header">
-                <h3>プリセット & バックアップ</h3>
+                <h3>共有用リンク ＆ プリセット</h3>
               </div>
+
+              <!-- LINE / Friend Share helper -->
+              <div class="backup-box" style="margin-top:0; margin-bottom:12px;">
+                <h4 style="color:#10b981; font-size:12px; margin-bottom:6px;">📱 LINE / 友達共有用リンク</h4>
+                <p style="font-size:11px; color:#cbd5e1; margin-bottom:8px;">LINE等で送った際に自動で外部ブラウザ（Safari等）で開くリンクをコピーします。</p>
+                <button class="btn-primary" id="btn-copy-share-url" style="width:100%; font-size:11px;">📋 LINE共有用リンクをコピー</button>
+              </div>
+
               <div class="presets-grid">
                 <div class="preset-card">
                   <div class="preset-badge">PRESET 1</div>
@@ -2301,6 +2380,7 @@ html, body {
                   <button class="btn-secondary" id="btn-load-preset-speed">適用</button>
                 </div>
               </div>
+
               <div class="backup-box">
                 <div class="backup-actions">
                   <button class="btn-primary" id="btn-export-config">💾 設定保存</button>
@@ -2541,7 +2621,7 @@ html, body {
     // --- 2. ConfigManager ---
     class ConfigManager {
       constructor() {
-        this.STORAGE_KEY = 'PRO_DRUMKIT_CONFIG_SMART_V2';
+        this.STORAGE_KEY = 'PRO_DRUMKIT_CONFIG_SMART_V3';
         this.defaultConfig = {
           masterVolume: 1.0,
           chokeHoldTimeMs: 200,
@@ -2936,12 +3016,12 @@ html, body {
           this.lastTouchTimestamp = Date.now();
           window.audioEngine.init();
 
-          // Do NOT preventDefault if touching start overlay, modals, or header buttons
-          if (e.target.closest('#audio-start-overlay, #settings-modal, #key-capture-modal, .app-header, button')) {
+          // If touching header buttons, modal UI or start card, allow normal UI interactions
+          if (e.target.closest('#settings-modal, #key-capture-modal, #fullscreen-guide-modal, .app-header, #audio-start-overlay')) {
             return;
           }
 
-          // Prevent emulated mouse events and gestures only on drum play area
+          // Prevent emulated mouse events and gestures ONLY on drum stage & mobile drum buttons
           if (e.target.closest('.drum-stage-wrapper, .mobile-pedal-btn, .mobile-kick-btn, .drum-piece')) {
             e.preventDefault();
           }
@@ -2965,13 +3045,16 @@ html, body {
               document.getElementById('mobile-pedal-btn')?.classList.add('active');
             } else {
               window.drumKit.hit(partId, touchKey);
+              if (partId === 'kick') {
+                document.getElementById('mobile-kick-btn')?.classList.add('active');
+              }
             }
           }
         };
 
         const handleTouchEnd = (e) => {
           this.lastTouchTimestamp = Date.now();
-          if (e.target.closest('#audio-start-overlay, #settings-modal, #key-capture-modal, .app-header, button')) {
+          if (e.target.closest('#settings-modal, #key-capture-modal, #fullscreen-guide-modal, .app-header, #audio-start-overlay')) {
             return;
           }
           if (e.target.closest('.drum-stage-wrapper, .mobile-pedal-btn, .mobile-kick-btn, .drum-piece')) {
@@ -2987,6 +3070,9 @@ html, body {
                 document.getElementById('mobile-pedal-btn')?.classList.remove('active');
               } else {
                 window.drumKit.cancelChokeHold(active.partId, active.touchKey);
+                if (active.partId === 'kick') {
+                  document.getElementById('mobile-kick-btn')?.classList.remove('active');
+                }
               }
               this.activeTouches.delete(touch.identifier);
             }
@@ -3014,6 +3100,9 @@ html, body {
             document.getElementById('mobile-pedal-btn')?.classList.add('active');
           } else {
             window.drumKit.hit(partId, 'mouse_part');
+            if (partId === 'kick') {
+              document.getElementById('mobile-kick-btn')?.classList.add('active');
+            }
           }
         });
 
@@ -3021,6 +3110,7 @@ html, body {
           if (Date.now() - this.lastTouchTimestamp < 800) return;
           window.drumKit.releasePedal('mouse_pedal');
           document.getElementById('mobile-pedal-btn')?.classList.remove('active');
+          document.getElementById('mobile-kick-btn')?.classList.remove('active');
           const piece = e.target.closest('.drum-piece');
           if (piece) {
             const partId = piece.getAttribute('data-part');
@@ -3066,6 +3156,8 @@ html, body {
         this.btnSaveClose = document.getElementById('btn-save-close');
         this.keyCaptureModal = document.getElementById('key-capture-modal');
         this.btnCancelCapture = document.getElementById('btn-cancel-capture');
+        this.fsGuideModal = document.getElementById('fullscreen-guide-modal');
+        this.btnCloseFsGuide = document.getElementById('btn-close-fs-guide');
 
         this.masterVolSlider = document.getElementById('master-volume');
         this.masterVolVal = document.getElementById('master-vol-val');
@@ -3078,11 +3170,29 @@ html, body {
         this.hihatStateText = document.getElementById('hihat-state-text');
         this.hihatPiece = document.getElementById('piece-hihat');
 
+        this.detectInAppBrowser();
         this.initEventListeners();
         this.renderKeymapTable();
         this.renderVolumeSliders();
         this.updateKeyBadges();
         this.applySettingsToControls();
+      }
+
+      detectInAppBrowser() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const isLine = ua.indexOf('Line') > -1;
+        const isDiscord = ua.indexOf('Discord') > -1;
+        const isInApp = isLine || isDiscord || ua.indexOf('FBAN') > -1 || ua.indexOf('FBAV') > -1 || ua.indexOf('Instagram') > -1;
+
+        if (isInApp) {
+          const banner = document.getElementById('inapp-warning-banner');
+          if (banner) {
+            banner.style.display = 'block';
+            document.getElementById('btn-inapp-safari-help')?.addEventListener('click', () => {
+              this.showFullscreenGuide();
+            });
+          }
+        }
       }
 
       initEventListeners() {
@@ -3098,12 +3208,12 @@ html, body {
         this.btnStartAudio.addEventListener('click', closeStartOverlay);
         this.btnStartAudio.addEventListener('touchend', closeStartOverlay);
         this.audioOverlay.addEventListener('click', (e) => {
-          if (e.target === this.audioOverlay || e.target.closest('.start-card')) {
+          if (e.target === this.audioOverlay || e.target.closest('.start-card-slim')) {
             closeStartOverlay(e);
           }
         });
         this.audioOverlay.addEventListener('touchend', (e) => {
-          if (e.target === this.audioOverlay || e.target.closest('.start-card')) {
+          if (e.target === this.audioOverlay || e.target.closest('.start-card-slim')) {
             closeStartOverlay(e);
           }
         });
@@ -3114,10 +3224,28 @@ html, body {
           }
         }, { once: true });
 
-        // Fullscreen Toggle button
+        // Fullscreen Button
         const btnFullscreen = document.getElementById('btn-toggle-fullscreen');
         if (btnFullscreen) {
           btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
+        }
+
+        if (this.btnCloseFsGuide) {
+          this.btnCloseFsGuide.addEventListener('click', () => this.hideFullscreenGuide());
+        }
+
+        // Copy Share URL for LINE (adds ?openExternalBrowser=1 automatically)
+        const btnCopyShare = document.getElementById('btn-copy-share-url');
+        if (btnCopyShare) {
+          btnCopyShare.addEventListener('click', () => {
+            let url = window.location.href.split('?')[0];
+            url += '?openExternalBrowser=1';
+            navigator.clipboard.writeText(url).then(() => {
+              alert('📋 LINE共有用リンクをコピーしました！\n\nLINEで友達にこのリンクを送ると、自動的に外部Safari/Chromeで開かれます。');
+            }).catch(() => {
+              prompt('以下のURLをコピーして友達に送信してください:', url);
+            });
+          });
         }
 
         this.btnOpenSettings.addEventListener('click', () => this.openSettings());
@@ -3231,6 +3359,33 @@ html, body {
         });
 
         this.btnCancelCapture.addEventListener('click', () => window.inputManager.cancelCapture());
+      }
+
+      showFullscreenGuide() {
+        if (this.fsGuideModal) this.fsGuideModal.classList.remove('hidden');
+      }
+
+      hideFullscreenGuide() {
+        if (this.fsGuideModal) this.fsGuideModal.classList.add('hidden');
+      }
+
+      toggleFullscreen() {
+        const doc = document.documentElement;
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+          if (doc.requestFullscreen) {
+            doc.requestFullscreen().catch(() => { this.showFullscreenGuide(); });
+          } else if (doc.webkitRequestFullscreen) {
+            doc.webkitRequestFullscreen();
+          } else {
+            this.showFullscreenGuide();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
       }
 
       applySettingsToControls() {
@@ -3540,26 +3695,6 @@ html, body {
           }, 3000);
         }
       }
-
-      toggleFullscreen() {
-        const doc = document.documentElement;
-        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-          if (doc.requestFullscreen) {
-            doc.requestFullscreen().catch(() => {});
-          } else if (doc.webkitRequestFullscreen) {
-            doc.webkitRequestFullscreen();
-          } else {
-            // iOS Safari explanation
-            alert('💡 iPhone Safariで完全全画面にする方法:\n\nSafariの共有ボタン(四角から上矢印 ⎋) をタップして「ホーム画面に追加 ＋」を選択すると、アドレスバーが消えて完全な全画面アプリとして起動します！');
-          }
-        } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          }
-        }
-      }
     }
 
     // --- 6. App Init ---
@@ -3574,7 +3709,7 @@ html, body {
           }
         }
       }
-      console.log('One-Tom Drum Kit (iPhone Landscape Smart Edition) ready.');
+      console.log('One-Tom Drum Kit (Mobile Landscape Edition) ready.');
     });
   </script>
 </body>
